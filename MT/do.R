@@ -77,7 +77,7 @@ for (binsize in c(1000, 500, 100, 50, 30, 15, 10, 5, 1)) {
     obj <- eval(parse(text=paste0('hg19.',binsize,'kbp.SR50')))
     bins <- obj@data
     res <- res[,names(bins)]
-    bins <- bins[!bins$chromosome %in% c('Y','MT'),]
+    bins <- bins[!bins$chromosome %in% 'MT',]
     bins <- rbind(bins, res)
     bins$residual[is.nan(bins$residual)] <- NA
     bins$gc[is.nan(bins$gc)] <- NA
@@ -113,13 +113,6 @@ for (binsize in c(1000, 500, 100, 50, 30, 15, 10, 5, 1)) {
     save(list=paste0('hg19.',binsize,'kbp.SR50'), file=paste0("data/hg19.", binsize, "kbp.SR50.rda"), compress='xz')
 }
 
-
-#rm(list=ls())
-#load('data/hg38.1000kbp.SR50.rda')
-#qc <- as.data.table(hg38.1000kbp.SR50@data)
-#qc[chromosome=='Y']
-#qc[start <= 2000001 & chromosome=='Y',]
-#qc[chromosome=='MT',]
 
 ## after installing the package, try these commands. rowNames should include MT bins
 #library(QDNAseq)
